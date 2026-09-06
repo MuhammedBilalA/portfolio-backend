@@ -16,7 +16,11 @@ app.get('/', (req, res) => {
 });
 app.use('/api', emailRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Email configured: ${Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS)}`);
-});
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`Email configured: ${Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS)}`);
+  });
+}
